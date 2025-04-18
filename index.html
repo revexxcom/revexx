@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revexx - Finansal Haberler ve Koçluk</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+    header { background-color: #1a73e8; color: white; text-align: center; padding: 20px; }
+    nav { background-color: #333; padding: 10px; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    .container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: white; border-radius: 5px; }
+    h2 { color: #1a73e8; }
+    .coaching-btn { display: inline-block; padding: 10px 20px; background-color: #1a73e8; color: white; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Revexx</h1>
+    <p>Finansal Haberler ve Koçluk</p>
+  </header>
+  <nav>
+    <a href="#haberler">Haberler</a>
+    <a href="#finanzcoaching">Finanzcoaching</a>
+  </nav>
+  <div class="container">
+    <h2 id="haberler">Güncel Finans Haberleri</h2>
+    <div id="news">
+      <p>Yakında finans haberleri burada!</p>
+    </div>
+    <h2 id="finanzcoaching">Finanzcoaching mit Revexx</h2>
+    <p>Profitieren Sie von unserem Finanzcoaching! Unsere Experten helfen Ihnen, Ihre finanziellen Ziele zu erreichen.</p>
+    <a href="#" class="coaching-btn">Termin Vereinbaren</a>
+  </div>
+  <script>
+    async function fetchNews() {
+      const url = "https://newsapi.org/v2/everything?q=finance&apiKey=a22e150daadf4ebcbd1edf36f0328647";
+      const response = await fetch(url);
+      const data = await response.json();
+      const articles = data.articles.slice(0, 5);
+      const newsDiv = document.getElementById("news");
+      newsDiv.innerHTML = "";
+      articles.forEach(article => {
+        newsDiv.innerHTML += `
+          <div style="margin-bottom: 20px;">
+            <strong style="color: blue;">${article.title}</strong><br>
+            ${article.description}<br>
+            <a href="${article.url}" target="_blank" style="color: #1a73e8;">Devamını oku</a>
+          </div>`;
+      });
+    }
+    fetchNews();
+  </script>
+</body>
+</html>
